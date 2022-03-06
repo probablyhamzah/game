@@ -1,4 +1,5 @@
 #include "PlayState.hpp"
+#include "GameOver.hpp"
 #include "PauseGame.hpp"
 
 #include <SFML/Window/Event.hpp>
@@ -25,7 +26,8 @@ PlayState::~PlayState()
 void PlayState::Init()
 {
     m_context->m_assets->AddTexture(WALL, "assets/textures/wall.png", true);
-
+    m_context->m_assets->AddFont(MAIN_FONT, "assets/fonts/Pacifico-Regular.ttf");
+    
     m_context->m_assets->AddPlayerTexture(NINJA, {
             "assets/textures/2x/run_0.png",
             "assets/textures/2x/run_1.png",
@@ -179,6 +181,12 @@ void PlayState::Update(sf::Time deltaTime)
     
         if(!isOn && m_entities[i].getState() != fall && m_entities[i].getState() != jump && m_entities[i].getState() != idle)
             m_entities[i].changeState(fall);
+
+        if(m_entities[i].isDead(m_context->m_window->getSize()))
+        {
+            m_context->m_states->Add(std::make_unique<GameOver>(m_context), true);
+            break;
+        }
     }
 
 
@@ -190,6 +198,7 @@ void PlayState::Update(sf::Time deltaTime)
     {
         m_entities[0].hit();
     }
+
 
     
 }

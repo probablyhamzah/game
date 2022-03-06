@@ -106,6 +106,16 @@ void Entity::hit()
     }
 }
 
+bool Entity::isDead(const sf::Vector2u &bounds)
+{
+    float bodyX = m_body.getPosition().x, bodyY = m_body.getPosition().y;
+
+    if(m_health == 0 || bodyX < 0 || bodyY < 0 || bodyX > bounds.x || bodyY > bounds.y)
+        return true;
+    else
+        return false;
+}
+
 void Entity::update(sf::Time dt)
 {
     m_elapsedTime += dt;

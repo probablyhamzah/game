@@ -56,6 +56,7 @@ public:
     bool IsOn(const sf::Sprite &other) const;
     bool isHit(const sf::FloatRect &rect) const;
     void hit();
+    bool isDead(const sf::Vector2u &bounds);
     
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 };
