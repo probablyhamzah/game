@@ -1,5 +1,5 @@
 # game
-A basic 2 player game. In development.
+A basic 2 player game. Work in progress.
 
 ## Usage
 1. Install SFML
