@@ -1,5 +1,5 @@
 CXX		  := g++
-CXX_FLAGS := -Wall -Wextra -Wno-unused-parameter -std=c++17 -ggdb
+CXX_FLAGS := -Wall -std=c++17 -ggdb
 
 
 INCLUDE	:= include
@@ -19,7 +19,7 @@ run: clean all
 	clear
 	$(EXECUTABLE)
 
-$(EXECUTABLE): $(SRC)/*.cpp
+$(EXECUTABLE): $(SRC)/*.cpp main.cpp
 	$(CXX) $(CXX_FLAGS) -I$(INCLUDE) -L$(LIB) $^ -o $@ $(LIBRARIES)
 
 
