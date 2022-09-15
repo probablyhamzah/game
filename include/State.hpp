@@ -2,21 +2,16 @@
 
 #include <SFML/System/Time.hpp>
 
-namespace Engine
+class State
 {
-    class State
-    {
-    public:
-        State(){};
-        virtual ~State(){};
+private:
+public:
+    State() {}
+    State(const State& state) {}
+    virtual ~State() {}
 
-        virtual void Init() = 0;
-        virtual void ProcessInput() = 0;
-        virtual void Update(sf::Time deltaTime) = 0;
-        virtual void Draw() = 0;
-
-        virtual void Pause(){};
-        virtual void Start(){};
-    };
     
-} // namespace Engine
+    virtual void processInput() = 0;
+    virtual void update(sf::Time dt) = 0;
+    virtual void render() = 0;
+};

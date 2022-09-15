@@ -1,42 +1,34 @@
 #pragma once
 
-#include <memory>
-#include <array>
-#include <vector>
-#include <random>
-
-#include <SFML/Graphics/Sprite.hpp>
-#include <SFML/Graphics/Text.hpp>
-
-#include "Game.hpp"
 #include "State.hpp"
+#include "globals.hpp"
+#include "StateMachine.hpp"
+#include "AssetManager.hpp"
 #include "Entity.hpp"
 #include "Block.hpp"
 
-class PlayState : public Engine::State
+#include <SFML/Graphics.hpp>
+
+class PlayState : public State
 {
 private:
-    std::shared_ptr<Context> m_context;
-
-    Entity m_entities[2];
+    sf::RenderWindow* window;
+    StateMachine* machine;
+    AssetManager* assets;
     
-    Block m_block;
-    int m_score;
-
-    //sf::Vector2f m_entityDirection;
-    sf::Time m_elapsedTime;
-    //sf::RectangleShape m_testbox;
+    int score;
+    Entity entities[2];
+    Block block;
+    sf::Time elapsedTime;
     
-    bool m_isPaused;
-
 public:
-    PlayState(std::shared_ptr<Context> &context);
+    PlayState();
+    PlayState(sf::RenderWindow* window, StateMachine* machine, AssetManager* assets);
+    PlayState(const PlayState& state);
     ~PlayState();
 
-    void Init() override;
-    void ProcessInput() override;
-    void Update(sf::Time deltaTime) override;
-    void Draw() override;
-    void Pause() override;
-    void Start() override;
+
+    void processInput();
+    void update(sf::Time dt);
+    void render();
 };

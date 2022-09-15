@@ -36,7 +36,7 @@ void Entity::Init(const sf::Texture &texture, const sf::Vector2f &position)
     m_body.setPosition(position);
 }
 
-void Entity::changeState(State state)
+void Entity::changeState(STATE state)
 {
     if(state == jump)
         m_dy = -15;
@@ -71,7 +71,7 @@ int Entity::getFrame()
     return m_frame;
 }
 
-State Entity::getState()
+STATE Entity::getState()
 {
     return m_state;
 }
